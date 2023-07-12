@@ -19,10 +19,11 @@ export const isNotBlank = (input: string): boolean => !isBlank(input);
 export const reverseString = (input: string): string => input.split('').reverse().join('');
 
 /** Extract JIRA issue keys from a string. */
+/** 2023-07-12 - JKM - now only grabs the first match from the begining of the branch name */
 export const getJIRAIssueKeys = (input: string): string[] => {
-  const matches = reverseString(input).toUpperCase().match(JIRA_REGEX_MATCHER);
+  const matches = input.toUpperCase().match(JIRA_REGEX_MATCHER);
   if (matches?.length) {
-    return matches.map(reverseString).reverse();
+    return matches.slice(0, 1)
   } else return [];
 };
 
@@ -365,7 +366,7 @@ export const getInvalidIssueStatusComment = (
   const displayKey = details.key.toUpperCase();
   return `
   <summary><a href="${details.url}" title="${displayKey}" target="_blank">${displayKey}</a></summary>
-  <p>:broken_heart: The detected issue is not in one of the allowed statuses :broken_heart: </p>    
+  <p>:broken_heart: The detected issue is not in one of the allowed statuses :broken_heart: </p>
    <table>
      <tr>
         <th>Detected Status</th>

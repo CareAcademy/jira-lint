@@ -31,12 +31,6 @@
   ],
   "author": "cleartax",
   "license": "MIT",
-  "husky": {
-    "hooks": {
-      "pre-push": "./scripts/pre-push.sh",
-      "pre-commit": "lint-staged && ./scripts/pre-commit.sh"
-    }
-  },
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^1.1.0",
